@@ -6,14 +6,12 @@ typedef int (*heap_cmp_t)(void* e1, void* e2);
 
 typedef struct heap{ 
     int size;
-    void* data[];
     heap_cmp_t cmp;
 } heap_t;
 
-heap_t* init_heap(int size,int elem_size, heap_cmp_t cmp) { 
+heap_t* init_heap(int size, heap_cmp_t cmp) { 
     heap_t* heap = malloc(sizeof(struct heap));
     heap->size = size;
-    heap->data = malloc(sizeof(elem_size) * size);
     return heap;
 }
 

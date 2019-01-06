@@ -1,7 +1,7 @@
 all: shared heap
 
 shared: unix.c
-	g++ -g -fPIC -Wall -Werror -Wextra -pedantic unix.c -shared -o libunix.so
+	gcc -g -fPIC -Wall -Werror -Wextra -pedantic unix.c -shared -o lib/libunix.so
 
 heap: heap.c
-	g++  heap.c -o heap
+	gcc  heap.c -o bin/heap
