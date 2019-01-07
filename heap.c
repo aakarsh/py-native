@@ -5,7 +5,7 @@
 
 typedef int (*heap_cmp_t)(void* e1, void* e2);
 
-typedef struct heap{ 
+typedef struct heap { 
 	int capacity;
 	int size;
 	void** data;
@@ -26,7 +26,7 @@ heap_t* heap_init(int capacity, heap_cmp_t cmp) {
 	return heap;
 }
 
-void free_heap(heap_t * heap) { 
+void heap_delete(heap_t * heap) { 
 	free(heap);
 }
 
@@ -73,14 +73,22 @@ int int_cmp(int a , int b) { return a - b; }
 
 int main(int argc, char* argv[]) { 
 	printf("[\n");
-	int s[] ={3,1,2};
-	heap_t * heap = heap_init(3, (heap_cmp_t) &int_cmp);
+
+	int s[] ={3,1,2,10,9,7, 6,5,4,8};
+	int len = 10;
+
+	heap_t * heap = heap_init(len, (heap_cmp_t) &int_cmp);
+
 	int i = 0;
-	for(i = 0 ; i < 3; i++){ 
+	for(i = 0 ; i < len; i++){ 
 		heap_insert(heap, &s[0]);
 	}
-	
-	free_heap(heap);
+	for(i = 0 ; i < len; i++) { 
+		printf("%d " , i);
+	}		
+
+	printf("\n" );
+	heap_delete(heap);
 	printf("]\n");
 	return 0;
 }
