@@ -71,6 +71,30 @@ int heap_insert(heap_t* heap, void* elem) {
 
 int int_cmp(int a , int b) { return a - b; }
 
+void sort_file(char* file_name) { 
+	FILE* file = fopen(file_name,"r");
+	char* line = NULL;
+	size_t linecap = 0 ; 
+	ssize_t linelen;
+	int nlines = 0;
+
+	heap_t* heap = heap_init(100000, (heap_cmp_t) strcmp);
+
+	while((linelen = getline(&line, &linecap, file)) > 0) { 
+		heap_insert(heap, line);
+		printf("insert [%s]\n",line);
+		nlines++;
+	}			
+
+	int i;	
+	for(i = 0 ; i < nlines; i++){
+		printf("%d: [%s]\n",i,(char*) heap->data[i]);
+	}
+
+	fclose(file);
+
+}
+
 int main(int argc, char* argv[]) { 
 	printf("[\n");
 
@@ -89,6 +113,7 @@ int main(int argc, char* argv[]) {
 
 	printf("\n" );
 	heap_delete(heap);
+	sort_file("/etc/passwd");
 	printf("]\n");
 	return 0;
 }
