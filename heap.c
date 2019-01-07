@@ -12,12 +12,12 @@ typedef struct heap{
 	heap_cmp_t cmp;
 } heap_t;
 
-int parent(int k)    { return k/2;        }
-int left(int k)      { return 2*k;        }
-int right(int k)     { return 2*k + 1;    }
-bool root(int index) { return index == 0; }
+static inline int parent(int k)    { return k/2;        }
+static inline int left(int k)      { return 2*k;        }
+static inline int right(int k)     { return 2*k + 1;    }
+static inline bool root(int index) { return index == 0; }
 
-heap_t* init_heap(int capacity, heap_cmp_t cmp) { 
+heap_t* heap_init(int capacity, heap_cmp_t cmp) { 
 	heap_t* heap = malloc(sizeof(struct heap));
 	heap->capacity = capacity;
 	heap->size = 0;
@@ -74,12 +74,14 @@ int int_cmp(int a , int b) { return a - b; }
 int main(int argc, char* argv[]) { 
 	printf("[\n");
 	int s[] ={3,1,2};
-	heap_t * heap = init_heap(3, (heap_cmp_t) &int_cmp);
+	heap_t * heap = heap_init(3, (heap_cmp_t) &int_cmp);
 	int i = 0;
 	for(i = 0 ; i < 3; i++){ 
 		heap_insert(heap, &s[0]);
 	}
+	
 	free_heap(heap);
 	printf("]\n");
 	return 0;
 }
+
